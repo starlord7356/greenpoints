@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Report - GreenPoints Kerala</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add Report</h1>
+        <form id="addReportForm">
+            <label for="userId">User ID:</label>
+            <select id="userId" name="userId" required>
+                <!-- Options will be populated by JavaScript -->
+            </select>
+            <label for="centerName">Center Name:</label>
+            <input type="text" id="centerName" name="centerName" readonly>
+            <label for="wasteTypes">Waste Types:</label>
+            <div id="wasteTypesContainer">
+                <div>
+                    <select name="wasteTypes[]" required>
+                        <option value="Plastic Waste">Plastic Waste – 10 GP/kg</option>
+                        <option value="Paper Waste">Paper Waste – 6 GP/kg</option>
+                        <option value="Glass Waste">Glass Waste – 3 GP/kg</option>
+                        <option value="Metal Waste">Metal Waste – 15 GP/kg</option>
+                        <option value="E-Waste">E-Waste (Electronics) – 25 GP/kg</option>
+                        <option value="Food Waste">Food Waste – 2 GP/kg</option>
+                        <option value="Garden Waste">Garden Waste – 3 GP/kg</option>
+                        <option value="Batteries">Batteries – 30 GP/kg</option>
+                        <option value="Medical Waste">Medical Waste – 50 GP/kg</option>
+                        <option value="Chemical Waste">Chemical Waste – 40 GP/kg</option>
+                        <option value="Tyres/Rubber Waste">Tyres/Rubber Waste – 5 GP/kg</option>
+                        <option value="Textile Waste">Textile Waste – 8 GP/kg</option>
+                    </select>
+                    <input type="number" name="quantities[]" placeholder="Quantity (kg)" required>
+                </div>
+            </div>
+            <button type="button" onclick="addWasteType()">Add Another Waste Type</button>
+            <div id="totalGreenPoints">Total GreenPoints: 0</div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <script src="add_report.js"></script>
+</body>
+</html>
