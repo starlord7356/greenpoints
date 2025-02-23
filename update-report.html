@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+    <link
+        rel="stylesheet"
+        as="style"
+        onload="this.rel='stylesheet'"
+        href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Public+Sans%3Awght%40400%3B500%3B700%3B900"
+    />
+    <title>GreenPoints Kerala - Update Report</title>
+    <link rel="icon" type="image/x-icon" href="./assets/GreenPoints.png" />
+    <link rel="stylesheet" href="./dist/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+</head>
+<body>
+    <div class="relative flex size-full min-h-screen flex-col bg-[#f8fcfa] group/design-root overflow-x-hidden" style='font-family: "Public Sans", "Noto Sans", sans-serif;'>
+        <div class="layout-container flex h-full grow flex-col">
+            <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e7f3ec] px-10 py-3">
+                <div class="flex items-center gap-4 text-[#0e1b13]">
+                    <img src="./assets/GreenPoints.png" alt="GreenPoints Kerala Logo" class="size-8" />
+                    <h2 class="text-[#0e1b13] text-lg font-bold leading-tight tracking-[-0.015em]">GreenPoints Kerala</h2>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="window.location.href='admin-dashboard.html'" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7f3ec] text-[#0e1b13] text-sm font-bold leading-normal tracking-[0.015em]">
+                        <span class="truncate">Back to Dashboard</span>
+                    </button>
+                    <button id="logoutBtn" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7f3ec] text-[#0e1b13] text-sm font-bold leading-normal tracking-[0.015em]">
+                        <span class="truncate">Logout</span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="px-4 md:px-40 flex flex-1 justify-center py-5">
+                <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+                    <div class="flex flex-wrap justify-between gap-3 p-4">
+                        <div>
+                            <p class="text-[#0e1b13] tracking-light text-[32px] font-bold leading-tight min-w-72">Update Report</p>
+                            <p id="centerName" class="text-[#4e976d] text-lg">Loading center name...</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <button id="exportBtn" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#e7f3ec] text-[#0e1b13] text-sm font-bold leading-normal tracking-[0.015em]">
+                                <span class="truncate">Export Data</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filters Section -->
+                    <div class="bg-white rounded-xl p-6 mb-6 shadow-sm">
+                        <h3 class="text-[#0e1b13] text-lg font-bold mb-4">Filters</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-[#4e976d] mb-2">Username</label>
+                                <input type="text" id="usernameFilter" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]" placeholder="Search by username">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#4e976d] mb-2">Date Range</label>
+                                <input type="text" id="dateRangeFilter" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]" placeholder="Select date range">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#4e976d] mb-2">Waste Type</label>
+                                <select id="wasteTypeFilter" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]">
+                                    <option value="">All Types</option>
+                                    <option value="plastic">Plastic</option>
+                                    <option value="electronic">Electronic</option>
+                                    <option value="organic">Organic</option>
+                                    <option value="metal">Metal</option>
+                                    <option value="paper">Paper</option>
+                                    <option value="glass">Glass</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#4e976d] mb-2">Points Range</label>
+                                <div class="flex gap-2">
+                                    <input type="number" id="minPointsFilter" class="w-1/2 px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]" placeholder="Min">
+                                    <input type="number" id="maxPointsFilter" class="w-1/2 px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]" placeholder="Max">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Transactions Table -->
+                    <div class="bg-white rounded-xl p-6 shadow-sm overflow-x-auto">
+                        <table class="w-full text-sm border-collapse">
+                            <thead class="bg-[#f8fcfa] border-b border-[#e7f3ec]">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-[#4e976d] font-semibold">Username</th>
+                                    <th class="px-6 py-3 text-left text-[#4e976d] font-semibold">Date/Time</th>
+                                    <th class="px-6 py-3 text-left text-[#4e976d] font-semibold">Waste Type</th>
+                                    <th class="px-6 py-3 text-right text-[#4e976d] font-semibold">Quantity (kg)</th>
+                                    <th class="px-6 py-3 text-right text-[#4e976d] font-semibold">Points</th>
+                                    <th class="px-6 py-3 text-center text-[#4e976d] font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactionsTableBody" class="divide-y divide-[#e7f3ec]">
+                                <!-- Transactions will be loaded here -->
+                            </tbody>
+                            <tfoot class="border-t border-[#e7f3ec] bg-[#f8fcfa]">
+                                <tr>
+                                    <td colspan="3" class="px-6 py-3 text-right font-semibold text-[#4e976d]">Total:</td>
+                                    <td id="totalQuantity" class="px-6 py-3 text-right font-semibold text-[#0e1b13]">0.00</td>
+                                    <td id="totalPoints" class="px-6 py-3 text-right font-semibold text-[#0e1b13]">0.00</td>
+                                    <td class="px-6 py-3"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <!-- Pagination -->
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="text-sm text-[#4e976d]">Showing <span id="currentRange">0-0</span> of <span id="totalEntries">0</span> entries</div>
+                            <div class="flex gap-2">
+                                <button id="prevPage" class="px-3 py-1 rounded-lg bg-[#e7f3ec] text-[#0e1b13] disabled:opacity-50">Previous</button>
+                                <button id="nextPage" class="px-3 py-1 rounded-lg bg-[#e7f3ec] text-[#0e1b13] disabled:opacity-50">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Transaction Modal -->
+    <div id="editModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl p-6 max-w-md w-full">
+            <h3 class="text-[#0e1b13] text-lg font-bold mb-4">Edit Transaction</h3>
+            <form id="editForm" class="space-y-4">
+                <input type="hidden" id="editTransactionId">
+                <div>
+                    <label class="block text-sm font-medium text-[#4e976d] mb-2">Waste Type</label>
+                    <select id="editWasteType" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]">
+                        <option value="plastic">Plastic - 11 GP/kg</option>
+                        <option value="electronic">Electronic - 16 GP/kg</option>
+                        <option value="organic">Organic - 5 GP/kg</option>
+                        <option value="metal">Metal - 13 GP/kg</option>
+                        <option value="paper">Paper - 8 GP/kg</option>
+                        <option value="glass">Glass - 8 GP/kg</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[#4e976d] mb-2">Quantity (kg)</label>
+                    <input type="number" id="editQuantity" step="0.01" min="0" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] focus:outline-none focus:border-[#19e66e]">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-[#4e976d] mb-2">Points</label>
+                    <input type="number" id="editPoints" class="w-full px-4 py-2 rounded-lg border border-[#d0e7d9] bg-gray-50" readonly>
+                </div>
+                <div class="flex justify-end gap-2 mt-6">
+                    <button type="button" id="cancelEdit" class="px-4 py-2 rounded-xl bg-[#e7f3ec] text-[#0e1b13]">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-xl bg-[#19e66e] text-[#0e1b13]">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="update-report.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - GreenPoints Kerala</title>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="leaves.css">
+    <link rel="stylesheet" href="logo.css">
+</head>
+<body>
+    <div class="leaves-container">
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+    </div>
+    <div class="signup-container container-layout flex min-h-screen items-center justify-center py-8">
+        <div class="signup-card card gradient-border w-full max-w-md p-8">
+            <div class="logo flex flex-col items-center space-y-4 mb-8">
+                <img src="./assets/GreenPoints.png" alt="GreenPoints Kerala Logo" class="logo-image w-24 h-24">
+                <h2 class="heading-1 text-center">Create Account</h2>
+            </div>
+            <form id="signupForm" class="form space-y-6">
+                <div class="form-group">
+                    <input type="text" id="name" class="input-field" required="required">
+                    <span class="text-small">Full Name</span>
+                    <i></i>
+                    <div class="error-text" id="name-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="dob" class="input-field" required="required">
+                    <span class="text-small">Date of Birth</span>
+                    <i></i>
+                    <div class="error-text" id="dob-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" class="input-field" required="required">
+                    <span class="text-small">Email</span>
+                    <i></i>
+                    <div class="error-text" id="email-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="username" class="input-field" required="required">
+                    <span class="text-small">Username</span>
+                    <i></i>
+                    <div class="error-text" id="username-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" class="input-field" required="required">
+                    <span class="text-small">Password</span>
+                    <i></i>
+                    <div class="error-text" id="password-error"></div>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="confirmPassword" class="input-field" required="required">
+                    <span class="text-small">Confirm Password</span>
+                    <i></i>
+                    <div class="error-text" id="confirm-password-error"></div>
+                </div>
+                <button type="submit" class="btn-primary w-full py-3">
+                    <span>Sign Up</span>
+                    <div class="button-loader"></div>
+                </button>
+                <div class="text-center text-small mt-4">
+                    Already have an account? <a href="index.html" class="nav-link">Login here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="signup.js"></script>
+</body>
+</html>
